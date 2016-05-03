@@ -71,8 +71,8 @@ public class Board {
 			currentPlayer = (currentPlayer == firstPlayer ? secondPlayer
 				: firstPlayer);
 		
-		//both players should'nt run out of numbers before a draw occurs.
-		assert !firstPlayer.numbers.isEmpty() && !secondPlayer.numbers.isEmpty():("Should have been a draw if both ran out of numbers.");
+		//both players shouldn't run out of numbers before a draw occurs.
+		assert firstPlayer.numbers.isEmpty() && secondPlayer.numbers.isEmpty():("Should have been a draw if both ran out of numbers.");
 		
 		//make move
 		if (currentPlayer.human) {
@@ -86,7 +86,7 @@ public class Board {
 		}
 		
 		//there should never be a time where a player can use the same number because it has been removed from their list.
-		assert !usedNumbers.contains(currentPlayer.currentNumber):("This number should have been removed") ;//don't allow same number to be played twice.
+		assert usedNumbers.contains(currentPlayer.currentNumber):("This number should have been removed") ;//don't allow same number to be played twice.
 		
 		//can see if the player went or not,if size of the numbers list is still the same they never made a move.
 		int currentSize = currentPlayer.numbers.size();
@@ -105,10 +105,12 @@ public class Board {
 		
 		//show used numbers
 		System.out.println("Used Numbers" + usedNumbers);
-		System.out.print("Board:");
+		System.out.print("Board:\n");
 		for (int r=0; r<3; r++)
-			for (int c=0; c<3; c++)
+			for (int c=0; c<3; c++){
 				System.out.print(" " + cells[r][c]);
+				if(c==2)System.out.println();
+			}
 		System.out.println();
 		
 		//check win or draw.
@@ -133,7 +135,10 @@ public class Board {
 					: firstPlayer);
 		}
 		
-		Sound soundToPlay = (currentPlayer.mySymbol == playerSymbol.EVEN) ? Assets.instance.sounds.first:Assets.instance.sounds.second;
+		//get sound to play depending on player.
+		Sound soundToPlay = (currentPlayer.mySymbol == playerSymbol.EVEN) ? 
+				Assets.instance.sounds.first:Assets.instance.sounds.second;
+		
 		AudioManager.instance.play(soundToPlay);
 		return true;
 	}

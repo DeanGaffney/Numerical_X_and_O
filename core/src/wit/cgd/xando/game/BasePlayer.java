@@ -1,5 +1,10 @@
 package wit.cgd.xando.game;
 
+/*
+ * Message to Kieran - If a runtime error occurs about 'Lambdas'
+ * go down to one of the errors where the lamdas syntax is and change project to JRE 1.8
+ */
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,11 +30,12 @@ public abstract class BasePlayer {
 		currentNumber = 0;	//when initialised make current number 0 . (change to number to be placed as game goes on)
 	}
 	
+	//uses one numbers list between the appropriate players by filtering even or odd numbers.
 	public void setSymbol(Symbol symbol) {
 		mySymbol = symbol;
 		opponentSymbol = (symbol == board.playerSymbol.EVEN) ? board.playerSymbol.ODD : board.playerSymbol.EVEN;
 		
-		//when the symbol has been picked change the symbols array to match even or odd numbers.
+		//when the symbol has been picked change the numbers array to match even or odd numbers.
 		if(symbol == board.playerSymbol.EVEN){
 			this.numbers= numbers.stream()		//create even number list for player upon creation.
 					.filter(even->even % 2 == 0)
@@ -59,12 +65,15 @@ public abstract class BasePlayer {
 			}
 	}
 	
+	//removes a number when used to avoid reusing numbers.
 	public void removeUsedNumber(int numberToRemove){
-		for(int i = 0; i < numbers.size();i++){
-			if(numbers.get(i) == numberToRemove)numbers.remove(i);
+		for(int number = 0; number < numbers.size();number++){
+			if(numbers.get(number) == numberToRemove)numbers.remove(number);
+			else continue;
 		}
 	}
 	
+	//make sure the number about to be used is an even num for EVEN and off for ODD.
 	public boolean checkValidNumber(int number){
 		return numbers.contains(number);
 	}

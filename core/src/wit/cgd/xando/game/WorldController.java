@@ -1,16 +1,16 @@
 package wit.cgd.xando.game;
 
-import wit.cgd.xando.game.ai.CheckAndImpactPlayer;
-import wit.cgd.xando.game.ai.MinimaxPlayer;
-import wit.cgd.xando.game.util.GamePreferences;
-import wit.cgd.xando.game.util.GameStats;
-import wit.cgd.xando.screens.MenuScreen;
-
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+
+import wit.cgd.xando.game.ai.MinimaxPlayer;
+import wit.cgd.xando.game.ai.RandomSpacePlayer;
+import wit.cgd.xando.game.util.GamePreferences;
+import wit.cgd.xando.game.util.GameStats;
+import wit.cgd.xando.screens.MenuScreen;
 
 public class WorldController extends InputAdapter {
 
@@ -38,15 +38,15 @@ public class WorldController extends InputAdapter {
 		if(prefs.firstPlayerHuman){
 			board.firstPlayer = new HumanPlayer(board,board.playerSymbol.EVEN);
 		}
-		//else{
-			//board.firstPlayer = new MinimaxPlayer(board, board.playerSymbol.EVEN,(int)GamePreferences.instance.firstPlayerSkill);
-		//}
+		else{
+			board.firstPlayer = new MinimaxPlayer(board, board.playerSymbol.EVEN,(int)GamePreferences.instance.firstPlayerSkill);
+		}
 		if(prefs.secondPlayerHuman){
 			board.secondPlayer = new HumanPlayer(board, board.playerSymbol.ODD);
 		}
-		//else{
-		//	board.secondPlayer = new MinimaxPlayer(board, board.playerSymbol.ODD,(int)GamePreferences.instance.secondPlayerSkill);
-		//}//*/
+		else{
+			board.secondPlayer = new MinimaxPlayer(board, board.playerSymbol.ODD,(int)GamePreferences.instance.secondPlayerSkill);
+		}
 	
 		board.start();
 

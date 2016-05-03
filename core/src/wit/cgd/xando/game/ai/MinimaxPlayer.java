@@ -1,32 +1,35 @@
 package wit.cgd.xando.game.ai;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import wit.cgd.xando.game.BasePlayer;
 import wit.cgd.xando.game.Board;
-import wit.cgd.xando.game.util.GamePreferences;
+import wit.cgd.xando.game.Board.Symbol;
 
 public class MinimaxPlayer extends BasePlayer {
 
 	private Random randomGenerator;
 	//change constructor to take skill levels for depth search.
-	public MinimaxPlayer(Board board, int symbol,int depth) {
+	public MinimaxPlayer(Board board, Symbol symbol,int depth) {
 		super(board, symbol);
 		name = "MinimaxPlayer";
 
 		// skill is measure of search depth
-		 skill = depth;
-		 System.out.println("Skill level......" + skill);
+		skill = depth;
+		System.out.println("Skill level......" + skill);
 
 		randomGenerator = new Random();
 	}
-	
+
 	@Override
 	public int move () {
-		return (int) minimax(mySymbol, opponentSymbol, 0);
+		return (board.currentPlayer == board.firstPlayer) ? 
+				(int) minimax(board.currentPlayer.numbers, board.secondPlayer.numbers, 0) : (int) minimax(board.currentPlayer.numbers, board.firstPlayer.numbers, 0);
 	}
 
-	private float minimax(int p_mySymbol, int p_opponentSymbol, int depth) {
+	private float minimax(List<Integer> myNumbers, List<Integer> opponentNumbers, int depth) {
 
 		final float WIN_SCORE = 100;        
 		final float DRAW_SCORE = 0;
@@ -40,47 +43,50 @@ public class MinimaxPlayer extends BasePlayer {
 			for (int c=0; c<3; ++c) {
 
 				// skip over used positions
-				if (board.cells[r][c]!=board.EMPTY) continue;
+				if (board.cells[r][c]!=board.EMPTY)continue;
 
 				String indent = new String(new char[depth]).replace("\0", "  ");
 				//Gdx.app.log(indent, "search ("+r+","+c+")");
+				for(Integer number : myNumbers){
+					// place move 
+					board.cells[r][c] = number;
 
-				// place move 
-				board.cells[r][c] = p_mySymbol;
-
-				// evaluate board (recursively)
-				if (board.hasWon(p_mySymbol, r, c)) {
-					score = WIN_SCORE;
-				} else if (board.isDraw()) {
-					score = DRAW_SCORE;
-				} else {
-					if (depth<skill) {
-						score = -minimax(p_opponentSymbol, p_mySymbol, depth+1);
+					// evaluate board (recursively)
+					if (board.hasWon(number, r, c)) {
+						currentNumber = number;
+						score = WIN_SCORE;
+					} else if (board.isDraw()) {
+						currentNumber = number;
+						score = DRAW_SCORE;
 					} else {
-						score = 0;
+						currentNumber = number;
+						if (depth<skill) {
+							score = -minimax(opponentNumbers, myNumbers, depth+1);
+						} else {
+							score = 0;
+						}
 					}
+
+					// update ranking
+
+					if (Math.abs(score-maxScore)<1.0E-5 && randomGenerator.nextDouble()<0.1) {
+						currentNumber = number;
+						maxScore = score;
+						maxPos = 3*r+c;
+
+					} else if (score>maxScore) {    // clear 
+						currentNumber = number;
+						maxScore = score;
+						maxPos = 3*r+c;
+					} 
+
+					// undo move 
+					board.cells[r][c] = board.EMPTY;
 				}
-
-				// update ranking
-
-				if (Math.abs(score-maxScore)<1.0E-5 && randomGenerator.nextDouble()<0.1) {
-					maxScore = score;
-					maxPos = 3*r+c;
-
-				} else if (score>maxScore) {    // clear 
-					maxScore = score;
-					maxPos = 3*r+c;
-				} 
-
-				//Gdx.app.log(indent, "Score "+score);
-
-				// undo move 
-				board.cells[r][c] = board.EMPTY;
-
 			}
 		}
 		// on uppermost call return move not score
-		return (depth==0? maxPos : maxScore);
+		return (depth==0 ? maxPos : maxScore);
 	};
 
 }

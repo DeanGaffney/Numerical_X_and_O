@@ -4,16 +4,22 @@ import java.util.Random;
 
 import wit.cgd.xando.game.BasePlayer;
 import wit.cgd.xando.game.Board;
+import wit.cgd.xando.game.Board.Symbol;
 import wit.cgd.xando.game.WorldRenderer;
 
 public class RandomSpacePlayer extends BasePlayer{
 
 	private static final String	TAG	= WorldRenderer.class.getName();
 	Random rand;
-	public RandomSpacePlayer(Board board, int symbol) {
+	public RandomSpacePlayer(Board board, Symbol symbol) {
 		super(board, symbol);
 		name = "RandomSpacePlayer";
 	}
+	
+	/*
+	 * Random space player generates a random free space and if its free takes that position.
+	 * this player then also generates a random number from their list of numbers and plays that number.
+	 */
 
 	@Override
 	public int move() {
@@ -21,7 +27,22 @@ public class RandomSpacePlayer extends BasePlayer{
 		while(true){
 			int r = (int)(Math.random() * 3);
 			int c = (int)(Math.random() * 3);
-			if(board.cells[r][c] == board.EMPTY)return r*3+c;
+			if(board.cells[r][c] == board.EMPTY){
+				currentNumber = getRandomNumber();
+				return r*3+c;
+			}
 		}
+	}
+	
+	public int getRandomNumber(){
+		assert numbers.isEmpty() : "Should be a draw";
+		
+		int randomNumber = 0;
+		do{
+			int index  = (int) (Math.random() * numbers.size());
+			randomNumber = numbers.get(index);
+		}while(!checkValidNumber(randomNumber));
+		
+		return randomNumber;
 	}
 }
