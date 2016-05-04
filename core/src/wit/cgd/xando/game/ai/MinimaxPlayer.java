@@ -70,12 +70,10 @@ public class MinimaxPlayer extends BasePlayer {
 					// update ranking
 
 					if (Math.abs(score-maxScore)<1.0E-5 && randomGenerator.nextDouble()<0.1) {
-						currentNumber = number;
 						maxScore = score;
 						maxPos = 3*r+c;
 
 					} else if (score>maxScore) {    // clear 
-						currentNumber = number;
 						maxScore = score;
 						maxPos = 3*r+c;
 					} 

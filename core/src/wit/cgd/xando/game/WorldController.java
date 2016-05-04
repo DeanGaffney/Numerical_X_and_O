@@ -6,8 +6,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-import wit.cgd.xando.game.ai.MinimaxPlayer;
-import wit.cgd.xando.game.ai.RandomSpacePlayer;
+import wit.cgd.xando.game.ai.ImpactSpacePlayer;
 import wit.cgd.xando.game.util.GamePreferences;
 import wit.cgd.xando.game.util.GameStats;
 import wit.cgd.xando.screens.MenuScreen;
@@ -39,13 +38,13 @@ public class WorldController extends InputAdapter {
 			board.firstPlayer = new HumanPlayer(board,board.playerSymbol.EVEN);
 		}
 		else{
-			board.firstPlayer = new MinimaxPlayer(board, board.playerSymbol.EVEN,(int)GamePreferences.instance.firstPlayerSkill);
+			board.firstPlayer = new ImpactSpacePlayer(board, board.playerSymbol.EVEN);
 		}
 		if(prefs.secondPlayerHuman){
 			board.secondPlayer = new HumanPlayer(board, board.playerSymbol.ODD);
 		}
 		else{
-			board.secondPlayer = new MinimaxPlayer(board, board.playerSymbol.ODD,(int)GamePreferences.instance.secondPlayerSkill);
+			board.secondPlayer = new ImpactSpacePlayer(board, board.playerSymbol.ODD);
 		}
 	
 		board.start();

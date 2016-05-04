@@ -39,10 +39,12 @@ public abstract class BasePlayer {
 		if(symbol == board.playerSymbol.EVEN){
 			this.numbers= numbers.stream()		//create even number list for player upon creation.
 					.filter(even->even % 2 == 0)
+					.sorted( (num1,num2) -> Integer.compare(num1, num2))
 					.collect(Collectors.toList());
 		}else{
 			this.numbers= numbers.stream()		//create odd number list for player upon creation.
 					.filter(odd->odd % 2 != 0)
+					.sorted( (num1,num2) -> Integer.compare(num1, num2))
 					.collect(Collectors.toList());
 		}
 	}

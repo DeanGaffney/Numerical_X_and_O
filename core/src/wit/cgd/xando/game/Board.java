@@ -8,6 +8,7 @@ import wit.cgd.xando.game.util.Constants;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 
 public class Board {
@@ -25,6 +26,7 @@ public class Board {
 	public Symbol playerSymbol;
 
 	public final int EMPTY = 0;
+	public int currentMove = 1;
 	
 	//used for board calculations and rendering textures.
 	public final int one = 1;
@@ -66,6 +68,7 @@ public class Board {
 	}
 
 	public boolean move(int row, int col) {
+		//System.out.println("Move number: " + currentMove);
 		//if the player the current player has run out of numbers to play then switch players.
 		if(currentPlayer.numbers.isEmpty())
 			currentPlayer = (currentPlayer == firstPlayer ? secondPlayer
@@ -135,6 +138,9 @@ public class Board {
 					: firstPlayer);
 		}
 		
+		//update move
+		currentMove++;
+		
 		//get sound to play depending on player.
 		Sound soundToPlay = (currentPlayer.mySymbol == playerSymbol.EVEN) ? 
 				Assets.instance.sounds.first:Assets.instance.sounds.second;
@@ -155,30 +161,66 @@ public class Board {
 	}
 
 	//checks to see if the numbers add up to 15 (GOAL_NUMBER)
-	//and makes sure all numbers in the row are not empty.
+	//and makes sure all numbers in the row are not empty. (i.e need 3 numbers to win)
 	public boolean hasWon(int number, int row, int col) {
 		return (
 				// 3-in-the-row
 				cells[row][0] + cells[row][1] + cells[row][2] == Constants.GOAL_NUMBER &&
-				allEmpty(cells[row][0],cells[row][1],cells[row][2])
+				notEmpty(cells[row][0],cells[row][1],cells[row][2])
 				||  // 3-in-the-column
 				cells[0][col] + cells[1][col] + cells[2][col] == Constants.GOAL_NUMBER &&
-						allEmpty(cells[0][col],cells[1][col],cells[2][col])
+						notEmpty(cells[0][col],cells[1][col],cells[2][col])
 				||  // 3-in-the-diagonal
-				row == col && cells[0][0] + cells[1][1] + cells[2][2] == Constants.GOAL_NUMBER &&
-						allEmpty(cells[0][0],cells[1][1],cells[2][2])
+				cells[0][0] + cells[1][1] + cells[2][2] == Constants.GOAL_NUMBER &&
+						notEmpty(cells[0][0],cells[1][1],cells[2][2])
 				|| // 3-in-the-opposite-diagonal
-				row + col == 2 && cells[0][2] + cells[1][1] + cells[2][0] == Constants.GOAL_NUMBER &&
-						allEmpty(cells[0][2],cells[1][1],cells[2][0])
+				cells[0][2] + cells[1][1] + cells[2][0] == Constants.GOAL_NUMBER &&
+						notEmpty(cells[0][2],cells[1][1],cells[2][0])
 				);
 	}
 	
 	//takes 3 spaces(numbers on the board) and makes sure they are not EMPTY i,e 0.
-	public boolean allEmpty(int number1,int number2,int number3){
+	public boolean notEmpty(int number1,int number2,int number3){
 		if(number1 == EMPTY)return false;
 		else if(number2 == EMPTY)return false;
 		else if(number3 == EMPTY)return false;
 		else return true;
+	}
+	
+	//true if entire board is empty,false otherwise.
+	public boolean allEmpty(){
+		for (int r = 0; r < 3;r++) {
+			for (int c = 0; c < 3; c++) {
+				if (cells[r][c] != EMPTY) {
+					return false; // an occupied cell found, not an empty board, exit
+				}
+			}
+		}
+		return true;
+	}
+	
+	//returns true if the board contains the number we are looking for.
+	public boolean contains(int number){
+		for (int r = 0; r < 3; r++) {
+			for (int c = 0; c < 3; c++) {
+				if (cells[r][c] == number) {
+					return true; // an occupied cell found, not an empty board, exit
+				}
+			}
+		}
+		return false;
+	}
+	
+	//returns the position on the board of the specified number.
+	public int positionOf(int number){
+		for (int r = 0; r < 3; r++) {
+			for (int c = 0; c < 3; c++) {
+				if (cells[r][c] == number) {
+					return r*3+c; // return position of number
+				}
+			}
+		}
+		return -1;
 	}
 
 	public void render(SpriteBatch batch) {
