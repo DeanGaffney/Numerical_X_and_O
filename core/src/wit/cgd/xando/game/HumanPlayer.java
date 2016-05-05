@@ -1,3 +1,12 @@
+/**
+ * @file        HumanPlayer.java
+ * @author      Dean Gaffney 20067423
+ * @assignment  Creats a human player derived from BasePlayer.java
+ * @brief       Controls all aspects of the human player for the game.
+ *
+ * @notes       Extends from BasePlayer
+ * 				
+ */
 package wit.cgd.xando.game;
 
 import wit.cgd.xando.game.Board.Symbol;
@@ -11,8 +20,6 @@ public class HumanPlayer extends BasePlayer {
 		super(board, symbol);
 		human = true;
 		name = "Human";
-		System.out.println("\nPlayer numbers");		//DEBUG PURPOSES
-		for(Integer num : numbers)System.out.print(num + " ");
 	}
 
 	@Override

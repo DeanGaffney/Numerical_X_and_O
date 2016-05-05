@@ -1,3 +1,13 @@
+/**
+ * @file        GameScreen.java
+ * @author      Dean Gaffney 20067423
+ * @assignment  Creates all ui and objects for the gamescreen
+ * @brief       This class controls all the objects for the game screen.
+ *
+ * @notes       Uses multiplexprocessor to allow for multiple processer inputs from worldcontroller
+ * 				and the game screens ui widgets.
+ * 				
+ */
 package wit.cgd.xando.screens;
 
 import com.badlogic.gdx.Game;
@@ -212,6 +222,12 @@ public class GameScreen extends AbstractGameScreen implements InputProcessor{
 		super.resume();
 		paused = false;
 	}
+	
+	/*
+	 * these methods needed to be implemented her in order for me to make use of multi processors.
+	 * This had to be done because java classes cant extend from two classes so my only option was to
+	 * implement the Input processor and ignore the uneeded methods the class took on.
+	 */
 
 	@Override
 	public boolean keyDown(int keycode) {

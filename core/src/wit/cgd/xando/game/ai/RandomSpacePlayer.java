@@ -1,3 +1,12 @@
+/**
+ * @file        RandomSpacePlayer.java
+ * @author      Dean Gaffney 20067423
+ * @assignment  Basic AI Strategy for playing the game.
+ * @brief       Plays random space with random number.
+ *
+ * @notes       Basic strategy player finds a random number and places it in a random space.
+ * 				
+ */
 package wit.cgd.xando.game.ai;
 
 import java.util.Random;

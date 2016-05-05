@@ -1,3 +1,12 @@
+/**
+ * @file        Board.java
+ * @author      Dean Gaffney 20067423
+ * @assignment  Creates the board for the game and controls players moves and updating of the board.
+ * @brief      Controls all aspects of the playing board for the game.
+ *
+ * @notes       
+ * 				
+ */
 package wit.cgd.xando.game;
 
 import java.util.ArrayList;

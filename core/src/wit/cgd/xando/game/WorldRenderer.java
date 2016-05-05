@@ -1,3 +1,12 @@
+/**
+ * @file        WorldRenderer.java
+ * @author      Dean Gaffney 20067423
+ * @assignment  Controls all the rendering within the game.
+ * @brief      Controls all aspects of rendering the game.
+ *
+ * @notes       
+ * 				
+ */
 package wit.cgd.xando.game;
 
 import wit.cgd.xando.game.WorldController;

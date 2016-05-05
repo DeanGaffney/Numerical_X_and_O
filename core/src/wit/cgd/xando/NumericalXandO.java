@@ -1,3 +1,12 @@
+/**
+ * @file        NumericalXandO.java
+ * @author      Dean Gaffney 20067423
+ * @assignment  The main class for running the application.
+ * @brief       This class controls all the setup and running of the game.
+ *
+ * @notes      
+ * 				
+ */
 package wit.cgd.xando;
 
 import wit.cgd.xando.game.Assets;

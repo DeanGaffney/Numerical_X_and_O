@@ -1,3 +1,12 @@
+/**
+ * @file        MinimaxPlayer.java
+ * @author      Dean Gaffney 20067423
+ * @assignment  Advanced AI Strategy for playing the game.
+ * @brief       Plays calculated choice made from treeset made from recursion.
+ *
+ * @notes      Not working properly.
+ * 				
+ */
 package wit.cgd.xando.game.ai;
 
 import java.util.List;

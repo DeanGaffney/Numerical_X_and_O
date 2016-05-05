@@ -1,3 +1,12 @@
+/**
+ * @file        Assets.java
+ * @author      Dean Gaffney 20067423
+ * @assignment  Creates all assets for the game
+ * @brief       This class controls all the oassets for the game
+ *
+ * @notes       
+ * 				
+ */
 package wit.cgd.xando.game;
 
 import wit.cgd.xando.game.util.Constants;

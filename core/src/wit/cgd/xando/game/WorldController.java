@@ -1,3 +1,12 @@
+/**
+ * @file        WorldController.java
+ * @author      Dean Gaffney 20067423
+ * @assignment  Monitors the games states and updates the game world accordingly.
+ * @brief      Controls all aspects of the game.
+ *
+ * @notes       
+ * 				
+ */
 package wit.cgd.xando.game;
 
 import com.badlogic.gdx.Game;

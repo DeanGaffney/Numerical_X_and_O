@@ -1,3 +1,12 @@
+/**
+ * @file        AudioManager.java
+ * @author      Dean Gaffney 20067423
+ * @assignment  Audio Manager for the sounds in the game.
+ * @brief       Controls all aspects of sound managment.
+ *
+ * @notes       
+ * 				
+ */
 package wit.cgd.xando.game.util;
 
 import com.badlogic.gdx.audio.Music;

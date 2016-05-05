@@ -1,3 +1,11 @@
+/**
+ * @file        GamePreferences.java
+ * @author      Dean Gaffney 20067423
+ * @assignment  Stores all of the game preferences set by player.
+ * @brief       
+ *
+ * @notes    
+ */
 package wit.cgd.xando.game.util;
 
 import com.badlogic.gdx.Gdx;

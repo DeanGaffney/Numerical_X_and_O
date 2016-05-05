@@ -1,3 +1,12 @@
+/**
+ * @file        BasePlayer.java
+ * @author      Dean Gaffney 20067423
+ * @assignment  Creates the structure for each player to follow
+ * @brief       This class controls the set behaviours for the players in the game.
+ *
+ * @notes       Uses lambdas and streams to assign odd or even numbers list to players. (refer to message if error)
+ * 				
+ */
 package wit.cgd.xando.game;
 
 /*

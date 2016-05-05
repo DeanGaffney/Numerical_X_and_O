@@ -1,3 +1,12 @@
+/**
+ * @file        GameStats.java
+ * @author      Dean Gaffney 20067423
+ * @assignment  Stores all game stats from the players games.
+ * @brief      
+ *
+ * @notes       
+ * 				
+ */
 package wit.cgd.xando.game.util;
 
 import com.badlogic.gdx.Gdx;

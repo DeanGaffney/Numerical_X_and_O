@@ -1,3 +1,12 @@
+/**
+ * @file        AbstractGameScreen.java
+ * @author      Dean Gaffney 20067423
+ * @assignment  Abstract class for the game screens in the game.
+ * @brief       
+ *
+ * @notes       
+ * 				
+ */
 package wit.cgd.xando.screens;
 
 import wit.cgd.xando.game.Assets;

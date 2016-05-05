@@ -1,3 +1,18 @@
+/**
+ * @file        ImpactSpacePlayer.java
+ * @author      Dean Gaffney 20067423
+ * @assignment  Advanced AI Strategy for playing the game.
+ * @brief       Plays specific spaces with specific numbers.
+ *
+ * @notes        This ai player takes into account if its an even or odd player.
+				 it then for the first several moves depending on its from of player will perform a move
+				 based off a strategy suited to the player.
+				 It then goes for the win,blocks or plays a random move in a random place.
+				 EVEN PLAYER - checks to see if 5 is on the board and tries to play a move in a line with 5 to set up for win.
+				 ODD PLAYER - avoids playing 5 for the first move as it's known as a losing move and from their competes for the win.
+				 The strategies are based off the link you gave us in class http://aturing.umcs.maine.edu/~markov/tictactoe.pdf
+ * 				 (ALSO HAS SOME USE OF LAMBDAS AND STREAMS IN CASE YOU GET RUNTIME ERROR CHANGE TO JRE 1.8)
+ */
 package wit.cgd.xando.game.ai;
 
 import java.util.List;
@@ -15,16 +30,6 @@ public class ImpactSpacePlayer extends BasePlayer {
 		super(board, symbol);
 		name = "ImpactSpacePlayer";
 	}
-
-	/*
-	 * This ai player takes into account if its an even or odd player.
-	 * it then for the first several moves depending on its from of player will perform a move
-	 * based off a strategy suited to the player.
-	 * It then goes for the win,blocks or plays a random move in a random place.
-	 * EVEN PLAYER - checks to see if 5 is on the board and tries to play a move in a line with 5 to set up for win.
-	 * ODD PLAYER - avoids playing 5 for the first move as it's known as a losing move and from their competes for the win.
-	 * The strategies are based off the link you gave us in class http://aturing.umcs.maine.edu/~markov/tictactoe.pdf
-	 */
 
 	@Override
 	public int move() {
@@ -78,7 +83,6 @@ public class ImpactSpacePlayer extends BasePlayer {
 		}
 		return -1;
 	}
-
 
 	//called if its the first move of the game for this player to place a strategy move..
 	public int strategicMove(){

@@ -1,3 +1,11 @@
+/**
+ * @file        DesktopLauncher.java
+ * @author      Dean Gaffney 20067423
+ * @assignment  Launches the main application for the desktop.
+ * @brief       
+ * @notes       
+ * 				
+ */
 package wit.cgd.xando.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;

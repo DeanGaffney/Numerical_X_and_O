@@ -1,3 +1,12 @@
+/**
+ * @file        MenuScreen.java
+ * @author      Dean Gaffney 20067423
+ * @assignment  The main menu screen with options and a play function.
+ * @brief       
+ *
+ * @notes      
+ * 				
+ */
 package wit.cgd.xando.screens;
 
 import wit.cgd.xando.game.util.AudioManager;

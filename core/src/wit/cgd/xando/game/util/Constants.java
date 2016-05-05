@@ -1,3 +1,12 @@
+/**
+ * @file        Constants.java
+ * @author      Dean Gaffney 20067423
+ * @assignment  Stores all the games constant values.
+ * @brief      
+ *
+ * @notes     
+ * 				
+ */
 package wit.cgd.xando.game.util;
 
 public class Constants {

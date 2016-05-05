@@ -1,3 +1,13 @@
+/**
+ * @file        FirstSpacePlayer.java
+ * @author      Dean Gaffney 20067423
+ * @assignment  Basic AI Strategy for playing the game.
+ * @brief       Plays first space with first number.
+ *
+ * @notes       Basic strategy player finds the first free space and places,
+	 			their first available number from their list of remaining numbers.
+ * 				
+ */
 package wit.cgd.xando.game.ai;
 
 import wit.cgd.xando.game.BasePlayer;
@@ -15,10 +25,7 @@ public class FirstSpacePlayer extends BasePlayer {
 		name = "FirstSpacePlayer";
 	}
 
-	/*
-	 * Basic strategy player finds the first free space and places,
-	 * their first available number from their list of remaining numbers.
-	 */
+	
 	@Override
 	public int move() {
 		for (int r=2; r>=0; --r)
