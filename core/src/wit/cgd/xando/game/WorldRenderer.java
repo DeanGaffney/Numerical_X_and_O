@@ -3,6 +3,7 @@ package wit.cgd.xando.game;
 import wit.cgd.xando.game.WorldController;
 import wit.cgd.xando.game.util.Constants;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -21,7 +22,10 @@ public class WorldRenderer implements Disposable {
 
 	private SpriteBatch			batch;
 	private WorldController		worldController;
-
+	public boolean				renderWinHint;
+	public boolean 				renderBlockHint;
+	public boolean				renderRandomHint;
+	public float 				renderHintTime;
 	public WorldRenderer(WorldController worldController) {
 		this.worldController = worldController;
 		init();
@@ -36,6 +40,10 @@ public class WorldRenderer implements Disposable {
 		cameraGUI.position.set(0, 0, 0);
 		cameraGUI.setToOrtho(true); // flip y-axis
 		cameraGUI.update();
+		renderWinHint = false;
+		renderBlockHint = false;
+		renderRandomHint = false;
+		renderHintTime = 3.0f;
 	}
 
 	public void resize(int width, int height) {
@@ -89,6 +97,53 @@ public class WorldRenderer implements Disposable {
 				message = "DRAW";
 			fontGameOver.draw(batch, message, x, y, 0, Align.center, true);
 			fontGameOver.setColor(1, 1, 1, 1);
+		}
+		
+		//check if hints need to be rendered.
+		if(renderWinHint && renderHintTime > 0){
+			renderHintTime -= Gdx.graphics.getDeltaTime();
+			if(renderHintTime <= 0){
+				renderHintTime = 3.0f;
+				renderWinHint = false;
+			}else{
+				float x = cameraGUI.viewportWidth / 2;
+				float y = cameraGUI.viewportHeight / 2;
+				BitmapFont fontWin = Assets.instance.fonts.defaultNormal;
+				fontWin.setColor(1, 0.75f, 0.25f, 1);
+				String message = "GO FOR THE WIN!";
+				fontWin.draw(batch, message, x, y, 0, Align.center, true);
+				fontWin.setColor(1, 1, 1, 1);
+			}
+		}
+		if(renderBlockHint && renderHintTime > 0){
+			renderHintTime -= Gdx.graphics.getDeltaTime();
+			if(renderHintTime <= 0){
+				renderHintTime = 3.0f;
+				renderBlockHint = false;
+			}else{
+				float x = cameraGUI.viewportWidth / 2;
+				float y = cameraGUI.viewportHeight / 2;
+				BitmapFont fontWin = Assets.instance.fonts.defaultNormal;
+				fontWin.setColor(1, 0.75f, 0.25f, 1);
+				String message = "GO FOR THE BLOCK!";
+				fontWin.draw(batch, message, x, y, 0, Align.center, true);
+				fontWin.setColor(1, 1, 1, 1);
+			}
+		}
+		if(renderRandomHint && renderHintTime > 0){
+			renderHintTime -= Gdx.graphics.getDeltaTime();
+			if(renderHintTime <= 0){
+				renderHintTime = 3.0f;
+				renderRandomHint = false;
+			}else{
+				float x = cameraGUI.viewportWidth / 2;
+				float y = cameraGUI.viewportHeight / 2;
+				BitmapFont fontWin = Assets.instance.fonts.defaultNormal;
+				fontWin.setColor(1, 0.75f, 0.25f, 1);
+				String message = "GO FOR A RANDOM MOVE!";
+				fontWin.draw(batch, message, x, y, 0, Align.center, true);
+				fontWin.setColor(1, 1, 1, 1);
+			}
 		}
 		batch.end();
 	}

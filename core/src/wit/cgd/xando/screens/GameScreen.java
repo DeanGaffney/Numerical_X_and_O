@@ -9,13 +9,12 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Stack;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener.ChangeEvent;
 
+import wit.cgd.xando.game.BasePlayer;
 import wit.cgd.xando.game.WorldController;
 import wit.cgd.xando.game.WorldRenderer;
 import wit.cgd.xando.game.util.Constants;
@@ -34,18 +33,17 @@ public class GameScreen extends AbstractGameScreen implements InputProcessor{
 	// MenuScreen widgets
 	private Button              undoButton;
 	private Button              hintButton;
-	private InputProcessor		undoProcessor;
-	private InputProcessor 		worldProcessor;
 
 	// debug
 	private final float         DEBUG_REBUILD_INTERVAL  = 5.0f;
 	private boolean             debugEnabled            = false;
 	private float               debugRebuildStage;
-
-	private InputProcessor GameScreen;
+	public enum Hint {WIN,BLOCK,RANDOM};
+	public Hint hint;
 
 	public GameScreen(Game game) {
 		super(game);
+		hint = null;
 	}
 
 	@Override
@@ -85,11 +83,11 @@ public class GameScreen extends AbstractGameScreen implements InputProcessor{
 		stack.setSize(Constants.VIEWPORT_GUI_WIDTH, Constants.VIEWPORT_GUI_HEIGHT);
 
 		// build all layers
-		stack.add(buildUndoLayer());
+		stack.add(buildUiLayer());
 
 	}
 
-	private Table buildUndoLayer(){
+	private Table buildUiLayer(){
 		Table table = new Table();
 		table.center().top();
 		table.row();
@@ -99,6 +97,15 @@ public class GameScreen extends AbstractGameScreen implements InputProcessor{
 			@Override
 			public void changed(ChangeEvent event, Actor actor) {
 				onUndoButtonClicked();
+			}
+		});
+
+		hintButton = new Button(skin, "hint");
+		table.add(hintButton).pad(Constants.BUTTON_PAD);
+		hintButton.addListener(new ChangeListener() {
+			@Override
+			public void changed(ChangeEvent event, Actor actor) {
+				onHintButtonClicked();
 			}
 		});
 		return table;
@@ -116,7 +123,7 @@ public class GameScreen extends AbstractGameScreen implements InputProcessor{
 		int col = pos%3;
 
 		boolean isEvenNumber = (worldController.board.cells[row][col] % 2 == 0) ? true: false;
-		
+
 		//go to the position that was last made and get number and add it back to the appropriate players list.
 		if((isEvenPlayer && isEvenNumber) || (!isEvenPlayer && !isEvenNumber)){
 			worldController.board.currentPlayer.numbers.add(worldController.board.cells[row][col]);
@@ -127,6 +134,46 @@ public class GameScreen extends AbstractGameScreen implements InputProcessor{
 		worldController.board.usedNumbers.remove(worldController.board.usedNumbers.indexOf(worldController.board.cells[row][col]));
 		//set this position back to 0 (i.e EMPTY)
 		worldController.board.cells[row][col] = worldController.board.EMPTY; //set this position back to 0 (i.e EMPTY)
+	}
+
+	//calculates and renders a hint on screen for the player.
+	private void onHintButtonClicked(){
+		//check your win
+		for(int r=0;r < 3; r++){
+			for(int c=0; c < 3; c++){
+				if(worldController.board.cells[r][c] == worldController.board.EMPTY && isWinningMove(worldController.board.currentPlayer,r,c)){
+					worldRenderer.renderWinHint = true;
+					return;
+				}
+			}
+		}
+
+		//check opponent win and block
+		for(int r=0;r < 3; r++){
+			for(int c=0; c < 3; c++){
+				if(worldController.board.cells[r][c] == worldController.board.EMPTY && isWinningMove(worldController.board.currentPlayer.opponent,r,c)){
+					worldRenderer.renderBlockHint = true;
+					return;
+				}
+			}
+		}
+
+		//make random move with random number if no other options.
+		worldRenderer.renderRandomHint = true;
+	}
+
+	//used to calculate hints for player.
+	public boolean isWinningMove(BasePlayer player,int row,int col){
+		//go for win with your current symbol,if its your player use winning num,otherwise block with random num.
+		for(Integer number : player.numbers){
+			worldController.board.cells[row][col] = number;
+			if(worldController.board.hasWon(number, row, col)){
+				worldController.board.cells[row][col] = worldController.board.EMPTY;
+				return true;
+			}
+		}
+		worldController.board.cells[row][col] = worldController.board.EMPTY;
+		return false;
 	}
 
 	@Override

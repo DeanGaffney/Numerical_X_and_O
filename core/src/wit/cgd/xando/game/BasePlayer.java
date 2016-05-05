@@ -70,20 +70,14 @@ public abstract class BasePlayer {
 	
 	//removes a number when used to avoid reusing numbers.
 	public void removeUsedNumber(int numberToRemove){
-		for(int number = 0; number < numbers.size();number++){
-			if(numbers.get(number) == numberToRemove)numbers.remove(number);
-			else continue;
-		}
+		numbers.remove(numbers.indexOf(numberToRemove));
 	}
 	
 	//make sure the number about to be used is an even num for EVEN and off for ODD.
 	public boolean checkValidNumber(int number){
 		return numbers.contains(number);
 	}
-	
-	public BasePlayer getOpponent(){
-		return opponent;
-	}
+		
 	public abstract int move ();
 	
 }

@@ -94,7 +94,6 @@ public class Board {
 		//can see if the player went or not,if size of the numbers list is still the same they never made a move.
 		int currentSize = currentPlayer.numbers.size();
 
-		System.out.println(" " + currentPlayer.human + " " + row + " " + col);
 		// store move
 		cells[row][col] = currentPlayer.currentNumber;		//change to the current players number.
 
@@ -104,16 +103,10 @@ public class Board {
 			usedNumbers.add(currentPlayer.currentNumber);
 			currentPlayer.removeUsedNumber(currentPlayer.currentNumber);
 
-			//add players move to the stack
+			//add players move to the stack (undo is controlled by GameScreen class,method 'onUndoButtonClicked')
 			moves.push(row*3+col);
-			System.out.println("Positions players have played\n" + moves);
 		}
-		
-		//show players numbers to choose from.
-		System.out.println(currentPlayer.numbers);
 
-		//show used numbers
-		System.out.println("Used Numbers" + usedNumbers);
 		System.out.print("Board:\n");
 		for (int r=0; r<3; r++)
 			for (int c=0; c<3; c++){

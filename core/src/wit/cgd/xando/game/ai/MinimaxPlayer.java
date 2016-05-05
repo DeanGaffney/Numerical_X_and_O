@@ -1,6 +1,5 @@
 package wit.cgd.xando.game.ai;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 

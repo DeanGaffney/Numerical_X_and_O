@@ -34,7 +34,7 @@ public class WorldController extends InputAdapter {
 	}
 
 	private void init() {
-		//Gdx.input.setInputProcessor(this);
+		//input processor handled in GameScreen using Multiplexer.
 		board = new Board();
 		if(prefs.firstPlayerHuman){
 			board.firstPlayer = new HumanPlayer(board,board.playerSymbol.EVEN);

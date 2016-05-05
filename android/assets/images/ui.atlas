@@ -6,84 +6,91 @@ filter: Nearest,Nearest
 repeat: none
 background
   rotate: false
-  xy: 2, 204
+  xy: 2, 305
   size: 800, 480
   orig: 800, 480
   offset: 0, 0
   index: -1
 cancel-dn
   rotate: false
-  xy: 804, 525
+  xy: 804, 626
   size: 115, 29
   orig: 115, 29
   offset: 0, 0
   index: -1
 cancel-up
   rotate: false
-  xy: 375, 97
+  xy: 2, 2
   size: 115, 29
   orig: 115, 29
   offset: 0, 0
   index: -1
+hint
+  rotate: false
+  xy: 804, 657
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
 options-dn
   rotate: false
-  xy: 375, 158
+  xy: 375, 259
   size: 371, 44
   orig: 371, 44
   offset: 0, 0
   index: -1
 options-up
   rotate: false
-  xy: 2, 62
+  xy: 2, 163
   size: 371, 44
   orig: 371, 44
   offset: 0, 0
   index: -1
 play-dn
   rotate: false
-  xy: 2, 156
+  xy: 2, 257
   size: 371, 46
   orig: 371, 46
   offset: 0, 0
   index: -1
 play-up
   rotate: false
-  xy: 2, 108
+  xy: 2, 209
   size: 371, 46
   orig: 371, 46
   offset: 0, 0
   index: -1
 reset-dn
   rotate: false
-  xy: 375, 128
+  xy: 375, 229
   size: 209, 28
   orig: 209, 28
   offset: 0, 0
   index: -1
 reset-up
   rotate: false
-  xy: 2, 32
+  xy: 132, 133
   size: 209, 28
   orig: 209, 28
   offset: 0, 0
   index: -1
 save-dn
   rotate: false
-  xy: 586, 128
+  xy: 375, 199
   size: 115, 28
   orig: 115, 28
   offset: 0, 0
   index: -1
 save-up
   rotate: false
-  xy: 2, 2
+  xy: 586, 229
   size: 115, 28
   orig: 115, 28
   offset: 0, 0
   index: -1
 undo
   rotate: false
-  xy: 804, 556
+  xy: 2, 33
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
