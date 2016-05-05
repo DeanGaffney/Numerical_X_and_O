@@ -25,6 +25,8 @@ public class WorldController extends InputAdapter {
 	TextureRegion               dragRegion;
 	private Game				game;
 	private GamePreferences		prefs = GamePreferences.instance;
+	
+	public boolean 					undoButtonClicked;
 
 	public WorldController(Game game) {
 		this.game = game;
@@ -32,7 +34,7 @@ public class WorldController extends InputAdapter {
 	}
 
 	private void init() {
-		Gdx.input.setInputProcessor(this);
+		//Gdx.input.setInputProcessor(this);
 		board = new Board();
 		if(prefs.firstPlayerHuman){
 			board.firstPlayer = new HumanPlayer(board,board.playerSymbol.EVEN);
@@ -47,7 +49,10 @@ public class WorldController extends InputAdapter {
 			board.secondPlayer = new ImpactSpacePlayer(board, board.playerSymbol.ODD);
 		}
 	
+		board.firstPlayer.opponent = board.secondPlayer;
+		board.secondPlayer.opponent = board.firstPlayer;
 		board.start();
+		undoButtonClicked = false;
 
 		timeLeftGameOverDelay = 2;
 	}
@@ -79,6 +84,11 @@ public class WorldController extends InputAdapter {
 			backToMenu();
 		}
 		return false;
+	}
+	
+	//returns if the undo button has been clicked on the game screen.
+	public boolean isUndoClicked(){
+		return undoButtonClicked;
 	}
 
 	@Override

@@ -15,6 +15,7 @@
         options: { down: options-dn, up: options-up },
         cancel: { down: cancel-dn, up: cancel-up },
         save: { down: save-dn, up: save-up },
+        undo: { down: undo,	up: undo},
     },
     com.badlogic.gdx.scenes.scene2d.ui.Image: {
         background: { drawable: background },

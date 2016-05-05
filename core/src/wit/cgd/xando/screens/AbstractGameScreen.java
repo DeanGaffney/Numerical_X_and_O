@@ -10,7 +10,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
-public abstract class AbstractGameScreen implements Screen {
+public abstract class AbstractGameScreen implements Screen  {
 
     protected Game  game;
     protected Skin skin;

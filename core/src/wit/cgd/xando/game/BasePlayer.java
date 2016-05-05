@@ -17,6 +17,7 @@ public abstract class BasePlayer {
 	public boolean human;
 	public String name;
 	public Board board;
+	public BasePlayer opponent;
 	public int 	skill;
 	public List<Integer>numbers = Arrays.asList(1,2,3,4,5,6,7,8,9);	//each player should have a list of symbols (even or odd)
 	public Symbol mySymbol, opponentSymbol;
@@ -79,7 +80,10 @@ public abstract class BasePlayer {
 	public boolean checkValidNumber(int number){
 		return numbers.contains(number);
 	}
-			
+	
+	public BasePlayer getOpponent(){
+		return opponent;
+	}
 	public abstract int move ();
 	
 }
